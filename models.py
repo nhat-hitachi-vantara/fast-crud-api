@@ -9,7 +9,7 @@ class Doi_xe(Base):
     id = Column(Integer, primary_key=True)
     ten_doi_xe = Column(String(80))
     #doi xe lien ket 1 to many voi xe
-    #xe_id = relationship("Xe")
+    xe_id = relationship("Xe", back_populates="doi_xe")
 
 #bang associate cho xe va tai xe theo many to many
 association_table_xetaixe = Table(
@@ -26,7 +26,9 @@ class Xe(Base):
     ten_xe = Column(Text)
 
     #lien ket voi doi xe 
-    doi_xe_id = Column( Integer , default=0)    
+    doi_xe_id = Column( Integer, ForeignKey("doi_xe.id"))    
+
+    doi_xe = relationship( "Doi_xe" , back_populates="xe_id")    
     
     #doi xe lien ket many to many voi tai xe
     xe_tai_xe = relationship( "Tai_xe" , secondary = association_table_xetaixe , backref="xe")

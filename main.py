@@ -32,10 +32,18 @@ def read_doi_xe(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     return doi_xe
 
 
+#dang code cho nay
+@app.get("/doixe_xe/{id}", response_model=List[schemas.Doi_xe])
+def read_xe_theo_doi(id: int, skip: int = 0, limit: int = 100,  db: Session = Depends(get_db)):
+    db_doi_xe = crud.get_xe_theo_doi_xe(db, id=id , skip=skip, limit=limit)
+    return db_doi_xe
+
+
 @app.get("/doixe/{id}", response_model=schemas.Doi_xe)
 def read_doi_xe_id(id: int, db: Session = Depends(get_db)):
     db_doi_xe = crud.get_doi_xe(db, id=id)
     return db_doi_xe
+
 
 
 @app.put("/update_doixe/{id}/") #id is a path parameter

@@ -7,6 +7,10 @@ import models, schemas
 def get_doi_xe(db: Session, id: int):
     return db.query(models.Doi_xe).filter(models.Doi_xe.id == id).first()
 
+#dang code do cho nay
+def get_xe_theo_doi_xe(db: Session, id: int, skip: int = 0, limit: int = 100):
+    return db.query(models.Doi_xe,models.Xe).filter(models.Doi_xe.id==models.Xe.id).filter(models.Doi_xe.id == id).all()
+    #return db.query(models.Doi_xe,models.Xe).filter(models.Doi_xe.id == id).offset(skip).limit(limit).all()
 
 def get_all_doi_xe(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Doi_xe).offset(skip).limit(limit).all()
