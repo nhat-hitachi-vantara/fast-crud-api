@@ -21,6 +21,8 @@ class Doi_xe(Doi_xe_Base):
 
 class Xe_Base(BaseModel):
     ten_xe: str
+    doi_xe_id: int
+    xe_tai_xe: int
 
 
 class Xe_Create(Xe_Base):
@@ -29,16 +31,14 @@ class Xe_Create(Xe_Base):
 
 class Xe(Xe_Base):
     id: int
-    doi_xe_id: int
-    #xe_tai_xe: int
-
+    
     class Config:
         orm_mode = True
 
 
 class Tai_xe_Base(BaseModel):
     ten_tai_xe: str
-
+    
 
 class Tai_xe_Create(Tai_xe_Base):
     pass

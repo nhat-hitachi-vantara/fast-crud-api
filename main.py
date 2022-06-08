@@ -21,25 +21,25 @@ def get_db():
 
 #CRUD cho doi xe
 
-@app.post("/doixe/", response_model=schemas.Doi_xe)
+@app.post("/doixe/")
 def create_doi_xe(doi_xe: schemas.Doi_xe_Create, db: Session = Depends(get_db)):
     return crud.create_doi_xe(db=db, doi_xe = doi_xe )
 
 
-@app.get("/doixe/", response_model=List[schemas.Doi_xe])
+@app.get("/doixe/")
 def read_doi_xe(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     doi_xe = crud.get_all_doi_xe(db, skip=skip, limit=limit)
     return doi_xe
 
 
-#dang code cho nay
-@app.get("/doixe_xe/{id}", response_model=List[schemas.Doi_xe])
+#Crud lay xe theo doi xe
+@app.get("/doixe_xe/{id}")
 def read_xe_theo_doi(id: int, skip: int = 0, limit: int = 100,  db: Session = Depends(get_db)):
     db_doi_xe = crud.get_xe_theo_doi_xe(db, id=id , skip=skip, limit=limit)
     return db_doi_xe
 
 
-@app.get("/doixe/{id}", response_model=schemas.Doi_xe)
+@app.get("/doixe/{id}")
 def read_doi_xe_id(id: int, db: Session = Depends(get_db)):
     db_doi_xe = crud.get_doi_xe(db, id=id)
     return db_doi_xe
@@ -73,18 +73,18 @@ def delete_doi_xe(id:int, db:Session=Depends(get_db)):
 #Crud cho xe
 
 
-@app.post("/xe/", response_model=schemas.Xe)
-def create_xe( doi_xe_id: int ,  xe: schemas.Xe_Create, db: Session = Depends(get_db)):
-    return crud.create_xe(db=db, xe = xe , doi_xe_id = doi_xe_id  )
+@app.post("/xe/")
+def create_xe( ten_xe: str , doi_xe_id : int ,  db: Session = Depends(get_db)):
+    return crud.create_xe(db=db, ten_xe = ten_xe , doi_xe_id = doi_xe_id , )
 
 
-@app.get("/xe/", response_model=List[schemas.Xe])
+@app.get("/xe/")
 def read_all_xe(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     xe = crud.get_all_xe(db, skip=skip, limit=limit)
     return xe
 
 
-@app.get("/xe/{id}", response_model=schemas.Xe)
+@app.get("/xe/{id}")
 def read_xe_id(id: int, db: Session = Depends(get_db)):
     xe = crud.get_xe(db, id=id)
     return xe
@@ -114,18 +114,18 @@ def delete_xe(id:int, db:Session=Depends(get_db)):
 
 #CRUD cho tai xe
 
-@app.post("/taixe/", response_model=schemas.Tai_xe)
+@app.post("/taixe/")
 def create_tai_xe(tai_xe: schemas.Tai_xe_Create, db: Session = Depends(get_db)):
     return crud.create_tai_xe(db=db, tai_xe = tai_xe )
 
 
-@app.get("/taixe/", response_model=List[schemas.Tai_xe])
+@app.get("/taixe/")
 def read_tai_xe(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     tai_xe = crud.get_all_tai_xe(db, skip=skip, limit=limit)
     return tai_xe
 
 
-@app.get("/taixe/{id}", response_model=schemas.Tai_xe)
+@app.get("/taixe/{id}")
 def read_tai_xe_id(id: int, db: Session = Depends(get_db)):
     tai_xe = crud.get_tai_xe(db, id=id)
     return tai_xe
@@ -155,18 +155,18 @@ def delete_tai_xe(id:int, db:Session=Depends(get_db)):
 
 #Crud cho chuyen xe
 
-@app.post("/chuyenxe/", response_model=schemas.Chuyen_xe)
+@app.post("/chuyenxe/")
 def create_chuyen_xe(chuyen_xe: schemas.Chuyen_xe_Create, db: Session = Depends(get_db)):
     return crud.create_chuyen_xe(db=db, chuyen_xe = chuyen_xe )
 
 
-@app.get("/chuyenxe/", response_model=List[schemas.Chuyen_xe])
+@app.get("/chuyenxe/")
 def read_chuyen_xe(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     chuyen_xe = crud.get_all_chuyen_xe(db, skip=skip, limit=limit)
     return chuyen_xe
 
 
-@app.get("/chuyenxe/{id}", response_model=schemas.Tai_xe)
+@app.get("/chuyenxe/{id}")
 def read_chuyen_xe_id(id: int, db: Session = Depends(get_db)):
     chuyen_xe = crud.get_chuyen_xe(db, id=id)
     return chuyen_xe

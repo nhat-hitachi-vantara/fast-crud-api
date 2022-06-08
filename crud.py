@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-print("test")
+
 import models, schemas
 
 #crud cho doi xe
@@ -9,7 +9,7 @@ def get_doi_xe(db: Session, id: int):
 
 #dang code do cho nay
 def get_xe_theo_doi_xe(db: Session, id: int, skip: int = 0, limit: int = 100):
-    return db.query(models.Doi_xe,models.Xe).filter(models.Doi_xe.id==models.Xe.id).filter(models.Doi_xe.id == id).all()
+    return db.query(models.Doi_xe,models.Xe).filter(models.Doi_xe.id==models.Xe.doi_xe_id).filter(models.Doi_xe.id == id).all()
     #return db.query(models.Doi_xe,models.Xe).filter(models.Doi_xe.id == id).offset(skip).limit(limit).all()
 
 def get_all_doi_xe(db: Session, skip: int = 0, limit: int = 100):
@@ -42,8 +42,9 @@ def get_xe(db: Session, id:int):
 def get_all_xe(db:Session, skip: int = 0, limit: int = 100):
     return db.query(models.Xe).offset(skip).limit(limit).all()
 
-def create_xe(db:Session, xe: schemas.Xe_Create ,doi_xe_id: int ):
-    db_xe = models.Xe( **xe.dict() , doi_xe_id = doi_xe_id)
+def create_xe(db:Session, ten_xe: str , doi_xe_id : int , ):
+    #db_xe = models.Xe( **xe.dict())
+    db_xe = models.Xe( ten_xe=ten_xe, doi_xe_id=doi_xe_id, )
     db.add(db_xe)
     db.commit()
     db.refresh(db_xe)
