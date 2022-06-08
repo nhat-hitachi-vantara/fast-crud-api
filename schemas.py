@@ -5,8 +5,6 @@ from pydantic import BaseModel
 class Doi_xe_Base(BaseModel):
     
     ten_doi_xe: str
-    #xe_id: int
-    #description: Union[str, None] = None
 
 
 class Doi_xe_Create(Doi_xe_Base):
@@ -22,7 +20,7 @@ class Doi_xe(Doi_xe_Base):
 class Xe_Base(BaseModel):
     ten_xe: str
     doi_xe_id: int
-    xe_tai_xe: int
+    xe_tai_xe: List[Tai_xe] = []
 
 
 class Xe_Create(Xe_Base):
@@ -46,7 +44,7 @@ class Tai_xe_Create(Tai_xe_Base):
 
 class Tai_xe(Tai_xe_Base):
     id: int
-    #tai_xe_xe: int
+    tai_xe_xe: List[Xe] = []
     #tai_xe_chuyen_xe: int
 
     class Config:

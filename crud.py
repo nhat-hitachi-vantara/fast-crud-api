@@ -42,9 +42,9 @@ def get_xe(db: Session, id:int):
 def get_all_xe(db:Session, skip: int = 0, limit: int = 100):
     return db.query(models.Xe).offset(skip).limit(limit).all()
 
-def create_xe(db:Session, ten_xe: str , doi_xe_id : int , ):
+def create_xe(db:Session, ten_xe: str , doi_xe_id : int , xe_tai_xe : list ):
     #db_xe = models.Xe( **xe.dict())
-    db_xe = models.Xe( ten_xe=ten_xe, doi_xe_id=doi_xe_id, )
+    db_xe = models.Xe( ten_xe=ten_xe, doi_xe_id=doi_xe_id, **xe_tai_xe.dict())
     db.add(db_xe)
     db.commit()
     db.refresh(db_xe)

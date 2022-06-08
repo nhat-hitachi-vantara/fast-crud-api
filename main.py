@@ -74,8 +74,8 @@ def delete_doi_xe(id:int, db:Session=Depends(get_db)):
 
 
 @app.post("/xe/")
-def create_xe( ten_xe: str , doi_xe_id : int ,  db: Session = Depends(get_db)):
-    return crud.create_xe(db=db, ten_xe = ten_xe , doi_xe_id = doi_xe_id , )
+def create_xe( ten_xe: str , doi_xe_id : int, xe_tai_xe : list ,  db: Session = Depends(get_db)):
+    return crud.create_xe(db=db, ten_xe = ten_xe , doi_xe_id = doi_xe_id , xe_tai_xe = xe_tai_xe)
 
 
 @app.get("/xe/")
