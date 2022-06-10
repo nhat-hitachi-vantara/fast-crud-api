@@ -73,6 +73,8 @@ def delete_doi_xe(id:int, db:Session=Depends(get_db)):
 #Crud cho xe -------------------------------------------------------------------------------------------------------
 """
 using this example to build endpoint for relationship column:
+
+test update github master
 https://stackoverflow.com/questions/68394091/fastapi-sqlalchemy-pydantic-%E2%86%92-how-to-process-many-to-many-relations
 
 def create_article(db: Session, article_data: schema.ArticleCreate):
