@@ -21,9 +21,15 @@ def get_db():
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 #CRUD cho doi xe
 
 @app.post("/doixe/", response_model=schemas.Doi_xe)
+=======
+#CRUD cho doi xe-----------------------------------
+
+@app.post("/doixe/")
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 =======
 #CRUD cho doi xe-----------------------------------
 
@@ -40,7 +46,11 @@ def create_doi_xe(doi_xe: schemas.Doi_xe_Create, db: Session = Depends(get_db)):
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 @app.get("/doixe/", response_model=List[schemas.Doi_xe])
+=======
+@app.get("/doixe/")
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 =======
 @app.get("/doixe/")
 >>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
@@ -54,8 +64,13 @@ def read_doi_xe(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 #dang code cho nay
 @app.get("/doixe_xe/{id}", response_model=List[schemas.Doi_xe])
+=======
+#Crud lay xe theo doi xe
+@app.get("/doixe_xe/{id}")
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 =======
 #Crud lay xe theo doi xe
 @app.get("/doixe_xe/{id}")
@@ -71,7 +86,11 @@ def read_xe_theo_doi(id: int, skip: int = 0, limit: int = 100,  db: Session = De
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 @app.get("/doixe/{id}", response_model=schemas.Doi_xe)
+=======
+@app.get("/doixe/{id}")
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 =======
 @app.get("/doixe/{id}")
 >>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
@@ -110,6 +129,7 @@ def delete_doi_xe(id:int, db:Session=Depends(get_db)):
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 #Crud cho xe
 
 
@@ -120,6 +140,8 @@ def create_xe( doi_xe_id: int ,  xe: schemas.Xe_Create, db: Session = Depends(ge
 
 @app.get("/xe/", response_model=List[schemas.Xe])
 =======
+=======
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 =======
 >>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 #Crud cho xe -------------------------------------------------------------------------------------------------------
@@ -150,6 +172,9 @@ def create_xe( doi_xe_id: int, xe_tai_xe: List, xe: schemas.Xe_Create,  db: Sess
 
 @app.get("/xe/")
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
+=======
 >>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 =======
 >>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
@@ -160,7 +185,11 @@ def read_all_xe(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 @app.get("/xe/{id}", response_model=schemas.Xe)
+=======
+@app.get("/xe/{id}")
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 =======
 @app.get("/xe/{id}")
 >>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
@@ -196,6 +225,7 @@ def delete_xe(id:int, db:Session=Depends(get_db)):
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 #CRUD cho tai xe
 
 @app.post("/taixe/", response_model=schemas.Tai_xe)
@@ -207,6 +237,8 @@ def create_tai_xe(tai_xe: schemas.Tai_xe_Create, db: Session = Depends(get_db)):
 =======
 =======
 >>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
+=======
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 #CRUD cho tai xe----------------------------------------
 
 @app.post("/taixe/")
@@ -216,6 +248,9 @@ def create_tai_xe(tai_xe_chuyen_xe : List, tai_xe: schemas.Tai_xe_Create, db: Se
 
 @app.get("/taixe/")
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
+=======
 >>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 =======
 >>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
@@ -226,7 +261,11 @@ def read_tai_xe(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 @app.get("/taixe/{id}", response_model=schemas.Tai_xe)
+=======
+@app.get("/taixe/{id}")
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 =======
 @app.get("/taixe/{id}")
 >>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
@@ -262,9 +301,15 @@ def delete_tai_xe(id:int, db:Session=Depends(get_db)):
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 #Crud cho chuyen xe
 
 @app.post("/chuyenxe/", response_model=schemas.Chuyen_xe)
+=======
+#Crud cho chuyen xe ---------------------------
+
+@app.post("/chuyenxe/")
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 =======
 #Crud cho chuyen xe ---------------------------
 
@@ -281,7 +326,11 @@ def create_chuyen_xe(chuyen_xe: schemas.Chuyen_xe_Create, db: Session = Depends(
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 @app.get("/chuyenxe/", response_model=List[schemas.Chuyen_xe])
+=======
+@app.get("/chuyenxe/")
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 =======
 @app.get("/chuyenxe/")
 >>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
@@ -295,7 +344,11 @@ def read_chuyen_xe(skip: int = 0, limit: int = 100, db: Session = Depends(get_db
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 @app.get("/chuyenxe/{id}", response_model=schemas.Tai_xe)
+=======
+@app.get("/chuyenxe/{id}")
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 =======
 @app.get("/chuyenxe/{id}")
 >>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f

@@ -11,8 +11,12 @@ def get_doi_xe(db: Session, id: int):
 #dang code do cho nay
 def get_xe_theo_doi_xe(db: Session, id: int, skip: int = 0, limit: int = 100):
 <<<<<<< HEAD
+<<<<<<< HEAD
     return db.query(models.Doi_xe,models.Xe).filter(models.Doi_xe.id==models.Xe.id).filter(models.Doi_xe.id == id).all()
     #return db.query(models.Doi_xe,models.Xe).filter(models.Doi_xe.id == id).offset(skip).limit(limit).all()
+=======
+    return db.query(models.Doi_xe,models.Xe).filter(models.Doi_xe.id==models.Xe.doi_xe_id).filter(models.Doi_xe.id == id).all()
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 =======
     return db.query(models.Doi_xe,models.Xe).filter(models.Doi_xe.id==models.Xe.doi_xe_id).filter(models.Doi_xe.id == id).all()
 >>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
@@ -48,8 +52,14 @@ def get_all_xe(db:Session, skip: int = 0, limit: int = 100):
     return db.query(models.Xe).offset(skip).limit(limit).all()
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 def create_xe(db:Session, xe: schemas.Xe_Create ,doi_xe_id: int ):
     db_xe = models.Xe( **xe.dict() , doi_xe_id = doi_xe_id)
+=======
+def create_xe(db:Session,  xe : schemas.Xe_Create , doi_xe_id: int, xe_tai_xe: List):
+    db_xe = models.Xe( **xe.dict(), doi_xe_id=doi_xe_id)
+    db_xe.xe_tai_xe=xe_tai_xe
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 =======
 def create_xe(db:Session,  xe : schemas.Xe_Create , doi_xe_id: int, xe_tai_xe: List):
     db_xe = models.Xe( **xe.dict(), doi_xe_id=doi_xe_id)

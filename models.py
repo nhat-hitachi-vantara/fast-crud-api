@@ -46,9 +46,14 @@ class Tai_xe(Base):
     ten_tai_xe = Column(Text)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     #tai_xe_xe = relationship( "Xe" , back_populates ="xe_tai_xe")
 
    
+=======
+    
+    
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 =======
     
     
@@ -68,7 +73,11 @@ class Chuyen_xe(Base):
     ten_chuyen_xe=Column(Text)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     #chuyen_xe_tai_xe = relationship( "Tai_xe" , back_populates ="tai_xe_chuyen_xe")
+=======
+    
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 =======
     
 >>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
