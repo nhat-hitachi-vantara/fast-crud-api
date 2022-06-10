@@ -19,27 +19,65 @@ def get_db():
     finally:
         db.close()
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 #CRUD cho doi xe
 
 @app.post("/doixe/", response_model=schemas.Doi_xe)
+=======
+#CRUD cho doi xe-----------------------------------
+
+@app.post("/doixe/")
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
+=======
+#CRUD cho doi xe-----------------------------------
+
+@app.post("/doixe/")
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 def create_doi_xe(doi_xe: schemas.Doi_xe_Create, db: Session = Depends(get_db)):
     return crud.create_doi_xe(db=db, doi_xe = doi_xe )
 
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 @app.get("/doixe/", response_model=List[schemas.Doi_xe])
+=======
+@app.get("/doixe/")
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
+=======
+@app.get("/doixe/")
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 def read_doi_xe(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     doi_xe = crud.get_all_doi_xe(db, skip=skip, limit=limit)
     return doi_xe
 
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 #dang code cho nay
 @app.get("/doixe_xe/{id}", response_model=List[schemas.Doi_xe])
+=======
+#Crud lay xe theo doi xe
+@app.get("/doixe_xe/{id}")
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
+=======
+#Crud lay xe theo doi xe
+@app.get("/doixe_xe/{id}")
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 def read_xe_theo_doi(id: int, skip: int = 0, limit: int = 100,  db: Session = Depends(get_db)):
     db_doi_xe = crud.get_xe_theo_doi_xe(db, id=id , skip=skip, limit=limit)
     return db_doi_xe
 
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 @app.get("/doixe/{id}", response_model=schemas.Doi_xe)
+=======
+@app.get("/doixe/{id}")
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
+=======
+@app.get("/doixe/{id}")
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 def read_doi_xe_id(id: int, db: Session = Depends(get_db)):
     db_doi_xe = crud.get_doi_xe(db, id=id)
     return db_doi_xe
@@ -70,6 +108,8 @@ def delete_doi_xe(id:int, db:Session=Depends(get_db)):
 
 
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 #Crud cho xe
 
 
@@ -79,12 +119,54 @@ def create_xe( doi_xe_id: int ,  xe: schemas.Xe_Create, db: Session = Depends(ge
 
 
 @app.get("/xe/", response_model=List[schemas.Xe])
+=======
+=======
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
+#Crud cho xe -------------------------------------------------------------------------------------------------------
+"""
+using this example to build endpoint for relationship column:
+
+test update github master
+https://stackoverflow.com/questions/68394091/fastapi-sqlalchemy-pydantic-%E2%86%92-how-to-process-many-to-many-relations
+
+def create_article(db: Session, article_data: schema.ArticleCreate):
+    db_article = model.Article(subject=article_data.subject, text=article_data.text)
+    if (editors := db.query(model.Editor).filter(model.Editor.id.in_(article_data.editor_ids))).count() == len(endpoint_data.topic_ids):
+        db_article.topics.extend(editors)
+    else:
+        # even if at least one editor is not found, an error is raised
+        # if existence is not matter you can skip this check and add relations only for existing data
+        raise HTTPException(status_code=404, detail="editor not found")
+    db.add(db_article)
+    db.commit()
+    db.refresh(db_article)
+    return db_article
+"""
+
+@app.post("/xe/")
+def create_xe( doi_xe_id: int, xe_tai_xe: List, xe: schemas.Xe_Create,  db: Session = Depends(get_db)):
+    return crud.create_xe(db=db, xe=xe, doi_xe_id=doi_xe_id,xe_tai_xe=xe_tai_xe)
+
+
+@app.get("/xe/")
+<<<<<<< HEAD
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
+=======
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 def read_all_xe(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     xe = crud.get_all_xe(db, skip=skip, limit=limit)
     return xe
 
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 @app.get("/xe/{id}", response_model=schemas.Xe)
+=======
+@app.get("/xe/{id}")
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
+=======
+@app.get("/xe/{id}")
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 def read_xe_id(id: int, db: Session = Depends(get_db)):
     xe = crud.get_xe(db, id=id)
     return xe
@@ -112,6 +194,8 @@ def delete_xe(id:int, db:Session=Depends(get_db)):
     else:
         return {"error": f"xe voi id {id} khong ton tai"}
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 #CRUD cho tai xe
 
 @app.post("/taixe/", response_model=schemas.Tai_xe)
@@ -120,12 +204,35 @@ def create_tai_xe(tai_xe: schemas.Tai_xe_Create, db: Session = Depends(get_db)):
 
 
 @app.get("/taixe/", response_model=List[schemas.Tai_xe])
+=======
+=======
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
+#CRUD cho tai xe----------------------------------------
+
+@app.post("/taixe/")
+def create_tai_xe(tai_xe_chuyen_xe : List, tai_xe: schemas.Tai_xe_Create, db: Session = Depends(get_db)):
+    return crud.create_tai_xe(db=db, tai_xe = tai_xe, tai_xe_chuyen_xe=tai_xe_chuyen_xe )
+
+
+@app.get("/taixe/")
+<<<<<<< HEAD
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
+=======
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 def read_tai_xe(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     tai_xe = crud.get_all_tai_xe(db, skip=skip, limit=limit)
     return tai_xe
 
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 @app.get("/taixe/{id}", response_model=schemas.Tai_xe)
+=======
+@app.get("/taixe/{id}")
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
+=======
+@app.get("/taixe/{id}")
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 def read_tai_xe_id(id: int, db: Session = Depends(get_db)):
     tai_xe = crud.get_tai_xe(db, id=id)
     return tai_xe
@@ -153,20 +260,48 @@ def delete_tai_xe(id:int, db:Session=Depends(get_db)):
     else:
         return {"error": f"tai xe voi id {id} khong ton tai"}
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 #Crud cho chuyen xe
 
 @app.post("/chuyenxe/", response_model=schemas.Chuyen_xe)
+=======
+#Crud cho chuyen xe ---------------------------
+
+@app.post("/chuyenxe/")
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
+=======
+#Crud cho chuyen xe ---------------------------
+
+@app.post("/chuyenxe/")
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 def create_chuyen_xe(chuyen_xe: schemas.Chuyen_xe_Create, db: Session = Depends(get_db)):
     return crud.create_chuyen_xe(db=db, chuyen_xe = chuyen_xe )
 
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 @app.get("/chuyenxe/", response_model=List[schemas.Chuyen_xe])
+=======
+@app.get("/chuyenxe/")
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
+=======
+@app.get("/chuyenxe/")
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 def read_chuyen_xe(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     chuyen_xe = crud.get_all_chuyen_xe(db, skip=skip, limit=limit)
     return chuyen_xe
 
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 @app.get("/chuyenxe/{id}", response_model=schemas.Tai_xe)
+=======
+@app.get("/chuyenxe/{id}")
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
+=======
+@app.get("/chuyenxe/{id}")
+>>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 def read_chuyen_xe_id(id: int, db: Session = Depends(get_db)):
     chuyen_xe = crud.get_chuyen_xe(db, id=id)
     return chuyen_xe
