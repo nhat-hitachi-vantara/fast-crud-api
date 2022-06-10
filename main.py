@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 from typing import List
 
 from fastapi import Depends, FastAPI, HTTPException
