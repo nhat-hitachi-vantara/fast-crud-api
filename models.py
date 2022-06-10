@@ -53,15 +53,12 @@ class Tai_xe(Base):
 =======
     
     
->>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 =======
     
     
->>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 =======
     
     
->>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
     #lien ket voi chuyen xe theo many to many
 
     tai_xe_chuyen_xe = relationship( "Chuyen_xe" , secondary= association_table_taixe_chuyenxe , backref="tai_xe" )
@@ -77,13 +74,10 @@ class Chuyen_xe(Base):
     #chuyen_xe_tai_xe = relationship( "Tai_xe" , back_populates ="tai_xe_chuyen_xe")
 =======
     
->>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 =======
     
->>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 =======
     
->>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 
 
     
