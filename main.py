@@ -56,7 +56,6 @@ def create_doi_xe(doi_xe: schemas.Doi_xe_Create, db: Session = Depends(get_db)):
 >>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 =======
 @app.get("/doixe/")
->>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 def read_doi_xe(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     doi_xe = crud.get_all_doi_xe(db, skip=skip, limit=limit)
     return doi_xe
@@ -70,15 +69,12 @@ def read_doi_xe(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 =======
 #Crud lay xe theo doi xe
 @app.get("/doixe_xe/{id}")
->>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 =======
 #Crud lay xe theo doi xe
 @app.get("/doixe_xe/{id}")
->>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 =======
 #Crud lay xe theo doi xe
 @app.get("/doixe_xe/{id}")
->>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 def read_xe_theo_doi(id: int, skip: int = 0, limit: int = 100,  db: Session = Depends(get_db)):
     db_doi_xe = crud.get_xe_theo_doi_xe(db, id=id , skip=skip, limit=limit)
     return db_doi_xe
@@ -90,10 +86,8 @@ def read_xe_theo_doi(id: int, skip: int = 0, limit: int = 100,  db: Session = De
 @app.get("/doixe/{id}", response_model=schemas.Doi_xe)
 =======
 @app.get("/doixe/{id}")
->>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 =======
 @app.get("/doixe/{id}")
->>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 =======
 @app.get("/doixe/{id}")
 >>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
@@ -127,9 +121,7 @@ def delete_doi_xe(id:int, db:Session=Depends(get_db)):
 
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 #Crud cho xe
 
 
@@ -139,11 +131,6 @@ def create_xe( doi_xe_id: int ,  xe: schemas.Xe_Create, db: Session = Depends(ge
 
 
 @app.get("/xe/", response_model=List[schemas.Xe])
-=======
-=======
->>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
-=======
->>>>>>> 60650329d9a79dfcba3bcbde0a8e93142c19981f
 #Crud cho xe -------------------------------------------------------------------------------------------------------
 """
 using this example to build endpoint for relationship column:
