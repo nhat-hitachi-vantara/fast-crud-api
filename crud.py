@@ -8,10 +8,8 @@ import models, schemas
 def get_doi_xe(db: Session, id: int):
     return db.query(models.Doi_xe).filter(models.Doi_xe.id == id).first()
 
-#dang code do cho nay
 def get_xe_theo_doi_xe(db: Session, id: int, skip: int = 0, limit: int = 100):
     return db.query(models.Doi_xe,models.Xe).filter(models.Doi_xe.id==models.Xe.doi_xe_id).filter(models.Doi_xe.id == id).all()
-    #return db.query(models.Doi_xe,models.Xe).filter(models.Doi_xe.id == id).offset(skip).limit(limit).all()
 
 def get_all_doi_xe(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Doi_xe).offset(skip).limit(limit).all()
@@ -43,9 +41,8 @@ def get_xe(db: Session, id:int):
 def get_all_xe(db:Session, skip: int = 0, limit: int = 100):
     return db.query(models.Xe).offset(skip).limit(limit).all()
 
-def create_xe(db:Session,  xe : schemas.Xe_Create , doi_xe_id: int, xe_tai_xe: List):
-    db_xe = models.Xe( **xe.dict(), doi_xe_id=doi_xe_id,xe_tai_xe=xe_tai_xe)
-    #db_xe = models.Xe( ten_xe=xe.ten_xe, doi_xe_id=xe.doi_xe_id, xe_tai_xe =xe.xe_tai_xe)
+def create_xe(db:Session,  xe : schemas.Xe_Create , doi_xe_id: int):
+    db_xe = models.Xe( **xe.dict(), doi_xe_id=doi_xe_id)
     db.add(db_xe)
     db.commit()
     db.refresh(db_xe)
@@ -73,8 +70,8 @@ def get_tai_xe(db:Session, id:int):
 def get_all_tai_xe(db:Session, skip: int = 0, limit: int = 100):
     return db.query(models.Tai_xe).offset(skip).limit(limit).all()
 
-def create_tai_xe(db:Session, tai_xe: schemas.Tai_xe_Create, tai_xe_chuyen_xe: List):
-    db_tai_xe = models.Tai_xe(**tai_xe.dict(), tai_xe_chuyen_xe=tai_xe_chuyen_xe)
+def create_tai_xe(db:Session, tai_xe: schemas.Tai_xe_Create):
+    db_tai_xe = models.Tai_xe(**tai_xe.dict())
     db.add(db_tai_xe)
     db.commit()
     db.refresh(db_tai_xe)
