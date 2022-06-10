@@ -71,7 +71,23 @@ def delete_doi_xe(id:int, db:Session=Depends(get_db)):
 
 
 #Crud cho xe -------------------------------------------------------------------------------------------------------
+"""
+using this example to build endpoint for relationship column:
+https://stackoverflow.com/questions/68394091/fastapi-sqlalchemy-pydantic-%E2%86%92-how-to-process-many-to-many-relations
 
+def create_article(db: Session, article_data: schema.ArticleCreate):
+    db_article = model.Article(subject=article_data.subject, text=article_data.text)
+    if (editors := db.query(model.Editor).filter(model.Editor.id.in_(article_data.editor_ids))).count() == len(endpoint_data.topic_ids):
+        db_article.topics.extend(editors)
+    else:
+        # even if at least one editor is not found, an error is raised
+        # if existence is not matter you can skip this check and add relations only for existing data
+        raise HTTPException(status_code=404, detail="editor not found")
+    db.add(db_article)
+    db.commit()
+    db.refresh(db_article)
+    return db_article
+"""
 
 @app.post("/xe/")
 def create_xe( doi_xe_id: int, xe_tai_xe: List, xe: schemas.Xe_Create,  db: Session = Depends(get_db)):
