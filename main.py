@@ -74,8 +74,8 @@ def delete_doi_xe(id:int, db:Session=Depends(get_db)):
 
 
 @app.post("/xe/")
-def create_xe( doi_xe_id: int, xe_tai_xe: List, xe: schemas.Xe_Create,  db: Session = Depends(get_db)):
-    return crud.create_xe(db=db, xe=xe, doi_xe_id=doi_xe_id,xe_tai_xe=xe_tai_xe)
+def create_xe( doi_xe_id: int, xe: schemas.Xe_Create,  db: Session = Depends(get_db)):
+    return crud.create_xe(db=db, xe=xe, doi_xe_id=doi_xe_id)
 
 
 @app.get("/xe/")
@@ -115,8 +115,8 @@ def delete_xe(id:int, db:Session=Depends(get_db)):
 #CRUD cho tai xe----------------------------------------
 
 @app.post("/taixe/")
-def create_tai_xe(tai_xe_chuyen_xe : List, tai_xe: schemas.Tai_xe_Create, db: Session = Depends(get_db)):
-    return crud.create_tai_xe(db=db, tai_xe = tai_xe, tai_xe_chuyen_xe=tai_xe_chuyen_xe )
+def create_tai_xe( tai_xe: schemas.Tai_xe_Create, db: Session = Depends(get_db)):
+    return crud.create_tai_xe(db=db, tai_xe = tai_xe )
 
 
 @app.get("/taixe/")
