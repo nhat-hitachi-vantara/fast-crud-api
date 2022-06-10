@@ -19,7 +19,7 @@ def get_db():
     finally:
         db.close()
 
-#CRUD cho doi xe
+#CRUD cho doi xe-----------------------------------
 
 @app.post("/doixe/")
 def create_doi_xe(doi_xe: schemas.Doi_xe_Create, db: Session = Depends(get_db)):
@@ -70,12 +70,12 @@ def delete_doi_xe(id:int, db:Session=Depends(get_db)):
 
 
 
-#Crud cho xe
+#Crud cho xe --------------------------------
 
 
 @app.post("/xe/")
-def create_xe( ten_xe: str , doi_xe_id : int, xe_tai_xe : list ,  db: Session = Depends(get_db)):
-    return crud.create_xe(db=db, ten_xe = ten_xe , doi_xe_id = doi_xe_id , xe_tai_xe = xe_tai_xe)
+def create_xe( doi_xe_id: int, xe_tai_xe: List, xe: schemas.Xe_Create,  db: Session = Depends(get_db)):
+    return crud.create_xe(db=db, xe=xe, doi_xe_id=doi_xe_id,xe_tai_xe=xe_tai_xe)
 
 
 @app.get("/xe/")
@@ -112,11 +112,11 @@ def delete_xe(id:int, db:Session=Depends(get_db)):
     else:
         return {"error": f"xe voi id {id} khong ton tai"}
 
-#CRUD cho tai xe
+#CRUD cho tai xe----------------------------------------
 
 @app.post("/taixe/")
-def create_tai_xe(tai_xe: schemas.Tai_xe_Create, db: Session = Depends(get_db)):
-    return crud.create_tai_xe(db=db, tai_xe = tai_xe )
+def create_tai_xe(tai_xe_chuyen_xe : List, tai_xe: schemas.Tai_xe_Create, db: Session = Depends(get_db)):
+    return crud.create_tai_xe(db=db, tai_xe = tai_xe, tai_xe_chuyen_xe=tai_xe_chuyen_xe )
 
 
 @app.get("/taixe/")
@@ -153,7 +153,7 @@ def delete_tai_xe(id:int, db:Session=Depends(get_db)):
     else:
         return {"error": f"tai xe voi id {id} khong ton tai"}
 
-#Crud cho chuyen xe
+#Crud cho chuyen xe ---------------------------
 
 @app.post("/chuyenxe/")
 def create_chuyen_xe(chuyen_xe: schemas.Chuyen_xe_Create, db: Session = Depends(get_db)):

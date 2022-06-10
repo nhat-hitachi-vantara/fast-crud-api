@@ -44,9 +44,8 @@ class Tai_xe(Base):
     __tablename__ = 'tai_xe'
     id = Column(Integer, primary_key=True)
     ten_tai_xe = Column(Text)
-    #tai_xe_xe = relationship( "Xe" , back_populates ="xe_tai_xe")
-
-   
+    
+    
     #lien ket voi chuyen xe theo many to many
 
     tai_xe_chuyen_xe = relationship( "Chuyen_xe" , secondary= association_table_taixe_chuyenxe , backref="tai_xe" )
@@ -56,7 +55,7 @@ class Chuyen_xe(Base):
     __tablename__ = 'chuyen_xe'
     id = Column(Integer, primary_key=True)
     ten_chuyen_xe=Column(Text)
-    #chuyen_xe_tai_xe = relationship( "Tai_xe" , back_populates ="tai_xe_chuyen_xe")
+    
 
 
     
