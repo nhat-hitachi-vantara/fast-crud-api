@@ -11,7 +11,6 @@ def get_doi_xe(db: Session, id: int):
 #dang code do cho nay
 def get_xe_theo_doi_xe(db: Session, id: int, skip: int = 0, limit: int = 100):
     return db.query(models.Doi_xe,models.Xe).filter(models.Doi_xe.id==models.Xe.doi_xe_id).filter(models.Doi_xe.id == id).all()
-    #return db.query(models.Doi_xe,models.Xe).filter(models.Doi_xe.id == id).offset(skip).limit(limit).all()
 
 def get_all_doi_xe(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Doi_xe).offset(skip).limit(limit).all()
@@ -44,8 +43,8 @@ def get_all_xe(db:Session, skip: int = 0, limit: int = 100):
     return db.query(models.Xe).offset(skip).limit(limit).all()
 
 def create_xe(db:Session,  xe : schemas.Xe_Create , doi_xe_id: int, xe_tai_xe: List):
-    db_xe = models.Xe( **xe.dict(), doi_xe_id=doi_xe_id,xe_tai_xe=xe_tai_xe)
-    #db_xe = models.Xe( ten_xe=xe.ten_xe, doi_xe_id=xe.doi_xe_id, xe_tai_xe =xe.xe_tai_xe)
+    db_xe = models.Xe( **xe.dict(), doi_xe_id=doi_xe_id)
+    db_xe.xe_tai_xe=xe_tai_xe
     db.add(db_xe)
     db.commit()
     db.refresh(db_xe)
