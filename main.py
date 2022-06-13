@@ -77,6 +77,10 @@ def delete_doi_xe(id:int, db:Session=Depends(get_db)):
 def create_xe( doi_xe_id: int, xe: schemas.Xe_Create,  db: Session = Depends(get_db)):
     return crud.create_xe(db=db, xe=xe, doi_xe_id=doi_xe_id)
 
+@app.post("/xe_taixe/")
+def create_xe_tai_xe( db: Session = Depends(get_db)):
+    return crud.create_xe_taixe(db=db)
+
 
 @app.get("/xe/")
 def read_all_xe(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):

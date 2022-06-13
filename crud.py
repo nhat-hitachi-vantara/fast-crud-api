@@ -1,6 +1,7 @@
+from optparse import Values
 from typing import List
 from sqlalchemy.orm import Session
-
+from sqlalchemy import insert
 import models, schemas
 
 #crud cho doi xe
@@ -47,6 +48,35 @@ def create_xe(db:Session,  xe : schemas.Xe_Create , doi_xe_id: int):
     db.commit()
     db.refresh(db_xe)
     return db_xe
+
+def create_xe_taixe(db:Session): 
+    
+    taixe=models.Tai_xe()
+    xe = models.Xe()
+    xe.xe_tai_xe.append(taixe)
+    db.add(xe)
+    db.commit()
+    db.refresh(xe)
+    return xe
+    """
+
+    """
+    """
+    testxe=db.query(models.Xe).filter(models.Xe.id == xe_id).first()
+    testtaixe=db.query(models.Tai_xe).filter(models.Tai_xe.id == tai_xe_id).first()
+    if testxe and testtaixe:
+        #p=models.Xe(id=xe_id)
+        #c=models.Tai_xe(id=tai_xe_id)
+
+        testxe.xe_tai_xe.append(testtaixe)
+        #p.xe_tai_xe.append(c) 
+        db.add(testtaixe)
+        db.commit()
+    else:
+        raise HTTPException(status_code=404, detail="xe va tai xe khong co")
+
+    insert(db.query(models.Xe)).values
+"""
 
 def update_xe(db:Session, id:int , ten_xe : str):
     db_xe=get_xe(db=db, id=id)
