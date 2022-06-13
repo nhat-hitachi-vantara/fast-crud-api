@@ -19,16 +19,17 @@ class Doi_xe(Doi_xe_Base):
 
 class Xe_Base(BaseModel):
     ten_xe: str
-    
+    doi_xe_id: int
+
 
 
 class Xe_Create(Xe_Base):
     pass
+    tai_xe_id : List[int]=[]
 
 
 class Xe(Xe_Base):
     id: int
-    doi_xe_id: int
     xe_tai_xe: List['Tai_xe'] = []
     class Config:
         orm_mode = True
@@ -40,7 +41,7 @@ class Tai_xe_Base(BaseModel):
 
 class Tai_xe_Create(Tai_xe_Base):
     pass
-
+    chuyen_xe_id: List[int] =[]
 
 class Tai_xe(Tai_xe_Base):
     id: int

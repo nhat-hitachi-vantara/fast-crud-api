@@ -92,8 +92,8 @@ def create_article(db: Session, article_data: schema.ArticleCreate):
 """
 
 @app.post("/xe/")
-def create_xe( doi_xe_id: int, xe_tai_xe: List, xe: schemas.Xe_Create,  db: Session = Depends(get_db)):
-    return crud.create_xe(db=db, xe=xe, doi_xe_id=doi_xe_id,xe_tai_xe=xe_tai_xe)
+def create_xe( xe: schemas.Xe,  db: Session = Depends(get_db)):
+    return crud.create_xe(db=db, xe=xe)
 
 
 @app.get("/xe/")
