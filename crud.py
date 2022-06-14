@@ -8,7 +8,7 @@ import models, schemas
 def get_doi_xe(db: Session, id: int):
     return db.query(models.Doi_xe).filter(models.Doi_xe.id == id).first()
 
-#dang code do cho nay
+#lay xe theo doi xe
 def get_xe_theo_doi_xe(db: Session, id: int, skip: int = 0, limit: int = 100):
     return db.query(models.Doi_xe,models.Xe).filter(models.Doi_xe.id==models.Xe.doi_xe_id).filter(models.Doi_xe.id == id).all()
 
@@ -42,9 +42,10 @@ def get_xe(db: Session, id:int):
 def get_all_xe(db:Session, skip: int = 0, limit: int = 100):
     return db.query(models.Xe).offset(skip).limit(limit).all()
 
-def create_xe(db:Session,  xe : schemas.Xe_Create , doi_xe_id: int, xe_tai_xe: List):
-    db_xe = models.Xe( **xe.dict(), doi_xe_id=doi_xe_id)
-    db_xe.xe_tai_xe=xe_tai_xe
+def create_xe(db:Session,  xe : schemas.Xe_Create ):
+    db_xe = models.Xe( **xe.dict())
+    taixe = db.query(models.Tai_xe).filter(models.Tai_xe.id.in_(xe.tai_xe_id))
+    db_xe.xe_tai_xe.append(taixe)
     db.add(db_xe)
     db.commit()
     db.refresh(db_xe)
