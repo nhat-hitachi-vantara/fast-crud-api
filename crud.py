@@ -42,6 +42,22 @@ def get_xe(db: Session, id:int):
 def get_all_xe(db:Session, skip: int = 0, limit: int = 100):
     return db.query(models.Xe).offset(skip).limit(limit).all()
 
+#take this to write crud for create_xe
+def create_user_groups(db: Session, user_groups: schemas.UserGroupsBase):
+    db_user = db.query(models.User).filter(models.User.id == user_groups.id_user).first()
+    db_group = db.query(models.Group).filter(models.Group.id == user_groups.id_group).first()
+
+    if not db_user and db_group:
+        raise HTTPException(status_code=409, detail="User or Group not found in system.")
+
+    db_user.groups.append(db_group)
+
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+    return db_user
+
+
 def create_xe(db:Session,  xe : schemas.Xe_Create ):
     db_xe = models.Xe( **xe.dict())
     taixe = db.query(models.Tai_xe).filter(models.Tai_xe.id.in_(xe.tai_xe_id))
