@@ -42,7 +42,7 @@ def get_xe(db: Session, id:int):
 def get_all_xe(db:Session, skip: int = 0, limit: int = 100):
     return db.query(models.Xe).offset(skip).limit(limit).all()
 
-#take this to write crud for create_xe
+#take this as hint to write crud for create_xe
 def create_user_groups(db: Session, user_groups: schemas.UserGroupsBase):
     db_user = db.query(models.User).filter(models.User.id == user_groups.id_user).first()
     db_group = db.query(models.Group).filter(models.Group.id == user_groups.id_group).first()
