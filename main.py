@@ -25,12 +25,10 @@ def get_db():
 def create_doi_xe(doi_xe: schemas.Doi_xe_Create, db: Session = Depends(get_db)):
     return crud.create_doi_xe(db=db, doi_xe = doi_xe )
 
-
 @app.get("/doixe/")
 def read_doi_xe(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     doi_xe = crud.get_all_doi_xe(db, skip=skip, limit=limit)
     return doi_xe
-
 
 #Crud lay xe theo doi xe
 @app.get("/doixe_xe/{id}")
@@ -38,13 +36,10 @@ def read_xe_theo_doi(id: int, skip: int = 0, limit: int = 100,  db: Session = De
     db_doi_xe = crud.get_xe_theo_doi_xe(db, id=id , skip=skip, limit=limit)
     return db_doi_xe
 
-
 @app.get("/doixe/{id}")
 def read_doi_xe_id(id: int, db: Session = Depends(get_db)):
     db_doi_xe = crud.get_doi_xe(db, id=id)
     return db_doi_xe
-
-
 
 @app.put("/update_doixe/{id}/") #id is a path parameter
 def update_doi_xe(id:int, ten_doi_xe:str, db:Session=Depends(get_db)):
@@ -57,7 +52,6 @@ def update_doi_xe(id:int, ten_doi_xe:str, db:Session=Depends(get_db)):
     else:
         return {"error": f"doi xe voi id {id} khong ton tai"}
 
-
 @app.delete("/xoa_doixe/{id}/") #id is a path parameter
 def delete_doi_xe(id:int, db:Session=Depends(get_db)):
 
@@ -68,10 +62,8 @@ def delete_doi_xe(id:int, db:Session=Depends(get_db)):
     else:
         return {"error": f"doi xe voi id {id} khong ton tai"}
 
-
-
 #Crud cho xe -------------------------------------------------------------------------------------------------------
-"""
+""" hint
 using this example to build endpoint for relationship column:
 
 test update github master
@@ -92,7 +84,7 @@ def create_article(db: Session, article_data: schema.ArticleCreate):
 """
 
 @app.post("/xe/")
-def create_xe( xe: schemas.Xe,  db: Session = Depends(get_db)):
+def create_xe( xe: schemas.Xe_Create,  db: Session = Depends(get_db)):
     return crud.create_xe(db=db, xe=xe)
 
 
@@ -133,8 +125,8 @@ def delete_xe(id:int, db:Session=Depends(get_db)):
 #CRUD cho tai xe----------------------------------------
 
 @app.post("/taixe/")
-def create_tai_xe(tai_xe_chuyen_xe : List, tai_xe: schemas.Tai_xe_Create, db: Session = Depends(get_db)):
-    return crud.create_tai_xe(db=db, tai_xe = tai_xe, tai_xe_chuyen_xe=tai_xe_chuyen_xe )
+def create_tai_xe(tai_xe: schemas.Tai_xe_Create, db: Session = Depends(get_db)):
+    return crud.create_tai_xe(db=db, tai_xe = tai_xe )
 
 
 @app.get("/taixe/")

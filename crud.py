@@ -42,6 +42,7 @@ def get_xe(db: Session, id:int):
 def get_all_xe(db:Session, skip: int = 0, limit: int = 100):
     return db.query(models.Xe).offset(skip).limit(limit).all()
 
+"""
 #take this as hint to write crud for create_xe
 def create_user_groups(db: Session, user_groups: schemas.UserGroupsBase):
     db_user = db.query(models.User).filter(models.User.id == user_groups.id_user).first()
@@ -56,11 +57,13 @@ def create_user_groups(db: Session, user_groups: schemas.UserGroupsBase):
     db.commit()
     db.refresh(db_user)
     return db_user
-
+"""
 
 def create_xe(db:Session,  xe : schemas.Xe_Create ):
-    db_xe = models.Xe( **xe.dict())
-    taixe = db.query(models.Tai_xe).filter(models.Tai_xe.id.in_(xe.tai_xe_id))
+    #db_xe = models.Xe( **xe.dict())
+    db_xe = models.Xe(ten_xe=xe.ten_xe, doi_xe_id=xe.doi_xe_id)
+
+    taixe = db.query(models.Tai_xe).filter(models.Tai_xe.id.in_(xe.tai_xe_id)).first()
     db_xe.xe_tai_xe.append(taixe)
     db.add(db_xe)
     db.commit()
@@ -89,8 +92,10 @@ def get_tai_xe(db:Session, id:int):
 def get_all_tai_xe(db:Session, skip: int = 0, limit: int = 100):
     return db.query(models.Tai_xe).offset(skip).limit(limit).all()
 
-def create_tai_xe(db:Session, tai_xe: schemas.Tai_xe_Create, tai_xe_chuyen_xe: List):
-    db_tai_xe = models.Tai_xe(**tai_xe.dict(), tai_xe_chuyen_xe=tai_xe_chuyen_xe)
+def create_tai_xe(db:Session, tai_xe: schemas.Tai_xe_Create):
+    db_tai_xe = models.Tai_xe(ten_tai_xe= tai_xe.ten_tai_xe)
+    #chuyen_xe = db.query(models.Chuyen_xe).filter(models.Chuyen_xe.id.in_(tai_xe.chuyen_xe_id)).all()
+    #db_tai_xe.tai_xe_chuyen_xe.append(chuyen_xe)
     db.add(db_tai_xe)
     db.commit()
     db.refresh(db_tai_xe)
@@ -115,6 +120,8 @@ def get_chuyen_xe(db:Session, id:int):
 
 def get_all_chuyen_xe(db:Session, skip: int = 0, limit: int = 100):
     return db.query(models.Chuyen_xe).offset(skip).limit(limit).all()
+
+
 
 def create_chuyen_xe(db:Session, chuyen_xe: schemas.Chuyen_xe_Create):
     db_chuyen_xe = models.Chuyen_xe(**chuyen_xe.dict())
