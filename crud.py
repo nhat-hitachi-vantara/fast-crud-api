@@ -62,11 +62,11 @@ def create_user_groups(db: Session, user_groups: schemas.UserGroupsBase):
 def create_xe(db:Session,  xe : schemas.Xe_Create ):
     #db_xe = models.Xe( **xe.dict())
     db_xe = models.Xe(ten_xe=xe.ten_xe, doi_xe_id=xe.doi_xe_id)
+    if len(xe.tai_xe_id):
+        taixe = db.query(models.Tai_xe).filter(models.Tai_xe.id.in_(xe.tai_xe_id))#.first()
+        for tungtaixe in taixe:
+            db_xe.xe_tai_xe.append(tungtaixe)
 
-
-    taixe = db.query(models.Tai_xe).filter(models.Tai_xe.id.in_(xe.tai_xe_id))#.first()
-    for tungtaixe in taixe:
-        db_xe.xe_tai_xe.append(tungtaixe)
     db.add(db_xe)
     db.commit()
     db.refresh(db_xe)
