@@ -96,8 +96,17 @@ def get_all_tai_xe(db:Session, skip: int = 0, limit: int = 100):
 
 def create_tai_xe(db:Session, tai_xe: schemas.Tai_xe_Create):
     db_tai_xe = models.Tai_xe(ten_tai_xe= tai_xe.ten_tai_xe)
-    #chuyen_xe = db.query(models.Chuyen_xe).filter(models.Chuyen_xe.id.in_(tai_xe.chuyen_xe_id)).all()
-    #db_tai_xe.tai_xe_chuyen_xe.append(chuyen_xe)
+
+    if len(tai_xe.xe_id):
+        xe = db.query(models.Xe).filter(models.Xe.id.in_(tai_xe.xe_id))#.first()
+        for tungxe in xe:
+            db_tai_xe.tai_xe_xe.append(tungxe)
+    
+    if len(tai_xe.chuyen_xe_id):
+        chuyenxe = db.query(models.Chuyen_xe).filter(models.Chuyen_xe.id.in_(tai_xe.chuyen_xe_id))#.first()
+        for tungchuyenxe in chuyenxe:
+            db_tai_xe.tai_xe_chuyen_xe.append(tungchuyenxe)
+
     db.add(db_tai_xe)
     db.commit()
     db.refresh(db_tai_xe)
@@ -126,7 +135,13 @@ def get_all_chuyen_xe(db:Session, skip: int = 0, limit: int = 100):
 
 
 def create_chuyen_xe(db:Session, chuyen_xe: schemas.Chuyen_xe_Create):
-    db_chuyen_xe = models.Chuyen_xe(**chuyen_xe.dict())
+    db_chuyen_xe = models.Chuyen_xe(ten_chuyen_xe=chuyen_xe.ten_chuyen_xe)
+
+    if len(chuyen_xe.tai_xe_id):
+        taixe = db.query(models.Tai_xe).filter(models.Tai_xe.id.in_(chuyen_xe.tai_xe_id))#.first()
+        for tungtaixe in taixe:
+            db_chuyen_xe.chuyen_xe_tai_xe.append(tungtaixe)
+
     db.add(db_chuyen_xe)
     db.commit()
     db.refresh(db_chuyen_xe)
@@ -140,7 +155,6 @@ def update_chuyen_xe(db:Session, id:int , ten_chuyen_xe : str ):
     return db_chuyen_xe
 
 def delete_chuyen_xe (db:Session , id:int):
-
     db_chuyen_xe = get_chuyen_xe(db=db , id=id)
     db.delete(db_chuyen_xe)
     db.commit()

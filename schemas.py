@@ -24,10 +24,7 @@ class Xe_Base(BaseModel):
 
 
 class Xe_Create(Xe_Base):
-    
     tai_xe_id : List[int] = []
-    #tai_xe_id : int
-
 
 class Xe(Xe_Base):
     id: int
@@ -42,11 +39,12 @@ class Tai_xe_Base(BaseModel):
     
 
 class Tai_xe_Create(Tai_xe_Base):
-    pass
-    #chuyen_xe_id: List[int] =[]
+    xe_id : List[int] = []
+    chuyen_xe_id: List[int] =[]
 
 class Tai_xe(Tai_xe_Base):
     id: int
+    tai_xe_xe : List['Xe'] = []
     tai_xe_chuyen_xe: List['Chuyen_xe'] = []
    
 
@@ -58,11 +56,11 @@ class Chuyen_xe_Base(BaseModel):
 
 
 class Chuyen_xe_Create(Chuyen_xe_Base):
-    pass
+    tai_xe_id : List[int] = []
 
 
 class Chuyen_xe(Chuyen_xe_Base):
     id: int
-
+    chuyen_xe_tai_xe: List['Tai_xe'] = []
     class Config:
         orm_mode = True

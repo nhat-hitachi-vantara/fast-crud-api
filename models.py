@@ -9,7 +9,7 @@ class Doi_xe(Base):
     id = Column(Integer, primary_key=True)
     ten_doi_xe = Column(String(80))
     #doi xe lien ket 1 to many voi xe
-    xe_id = relationship("Xe", back_populates="doi_xe")
+    xe_id = relationship("Xe", backref="doi_xe")
 
 #bang associate cho xe va tai xe theo many to many
 association_table_xetaixe = Table(
@@ -26,12 +26,10 @@ class Xe(Base):
     ten_xe = Column(Text)
 
     #lien ket voi doi xe 
-    doi_xe_id = Column( Integer, ForeignKey("doi_xe.id"))    
-
-    doi_xe = relationship( "Doi_xe" , back_populates="xe_id")    
+    doi_xe_id = Column(Integer, ForeignKey("doi_xe.id"))  
     
     #doi xe lien ket many to many voi tai xe
-    xe_tai_xe = relationship( "Tai_xe" , secondary = association_table_xetaixe , backref="xe")
+    xe_tai_xe = relationship( "Tai_xe" , secondary = association_table_xetaixe , back_populates="xe")
 
 association_table_taixe_chuyenxe = Table(
     "association table cho tai xe va chuyen xe",
@@ -45,6 +43,8 @@ class Tai_xe(Base):
     id = Column(Integer, primary_key=True)
     ten_tai_xe = Column(Text)
     
+    tai_xe_xe = relationship( "Xe" , secondary = association_table_xetaixe , back_populates="tai_xe")
+
     
     #lien ket voi chuyen xe theo many to many
 
@@ -55,6 +55,8 @@ class Chuyen_xe(Base):
     __tablename__ = 'chuyen_xe'
     id = Column(Integer, primary_key=True)
     ten_chuyen_xe=Column(Text)
+    chuyen_xe_tai_xe = relationship( "Tai_xe" , secondary= association_table_taixe_chuyenxe , backref="chuyen_xe" )
+
     
 
 
