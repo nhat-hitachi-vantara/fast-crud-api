@@ -59,6 +59,16 @@ def create_user_groups(db: Session, user_groups: schemas.UserGroupsBase):
     return db_user
 """
 
+#endpoint input cho xe va tai xe association table
+def create_xetaixe(db:Session , xetaixe : schemas.Xe_taixe):
+    db_xe=db.query(models.Xe).filter(models.Xe.id==xetaixe.xe_id).first()
+    db_taixe=db.query(models.Tai_xe).filter(models.Tai_xe.id==xetaixe.taixe_id).first()
+    db_xe.xe_tai_xe.append(db_taixe)
+    db.add(db_xe)
+    db.commit()
+    return "ok"
+###############################################################################
+
 def create_xe(db:Session,  xe : schemas.Xe_Create ):
     #db_xe = models.Xe( **xe.dict())
     db_xe = models.Xe(ten_xe=xe.ten_xe, doi_xe_id=xe.doi_xe_id)
@@ -72,10 +82,10 @@ def create_xe(db:Session,  xe : schemas.Xe_Create ):
     db.refresh(db_xe)
     return db_xe
 #
-def update_xe(db:Session, id:int , ten_xe : str):
+def update_xe(db:Session, xe: schemas.Xe_Base,id :int):
     db_xe=get_xe(db=db, id=id)
-    db_xe.ten_xe = ten_xe
-    db_xe.id = id
+    db_xe.ten_xe = xe.ten_xe
+    db_xe.doi_xe_id = xe.doi_xe_id
     db.commit()
     db.refresh(db_xe)
     return db_xe
@@ -93,10 +103,10 @@ def get_tai_xe(db:Session, id:int):
 
 def get_all_tai_xe(db:Session, skip: int = 0, limit: int = 100):
     return db.query(models.Tai_xe).offset(skip).limit(limit).all()
-"""
+
 def get_chuyenxe_theo_tai_xe(db: Session, id: int, skip: int = 0, limit: int = 100):
     return db.query(models.Tai_xe,models.Chuyen_xe).filter(models.Tai_xe.tai_xe_chuyen_xe==models.Chuyen_xe.id).filter(models.Tai_xe.id==id).all()
-"""
+
     
 
 

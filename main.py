@@ -62,10 +62,27 @@ def delete_doi_xe(id:int, db:Session=Depends(get_db)):
         return crud.delete_doi_xe(db=db, id=id)
     else:
         return {"error": f"doi xe voi id {id} khong ton tai"}
+#Crud cho xe va tai  xe -------------------------------------------------------------------------------------------------------
+@app.post("/xetaixe/")
+def create_xetaixe( xetaixe: schemas.Xe_taixe,  db: Session = Depends(get_db)):
+    return crud.create_xetaixe(db=db, xetaixe=xetaixe)
+
+"""
+@app.get("/xe/")
+def read_all_xe(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    xe = crud.get_all_xetaixe(db, skip=skip, limit=limit)
+    return xe
+
+
+@app.get("/xe/{id}")
+def read_xe_id(id: int, db: Session = Depends(get_db)):
+    xe = crud.get_xetaixe(db, id=id)
+    return xe
+"""
 
 #Crud cho xe -------------------------------------------------------------------------------------------------------
-""" hint
-using this example to build endpoint for relationship column:
+""" 
+hint using this example to build endpoint for relationship column:
 
 test update github master
 https://stackoverflow.com/questions/68394091/fastapi-sqlalchemy-pydantic-%E2%86%92-how-to-process-many-to-many-relations
@@ -102,12 +119,12 @@ def read_xe_id(id: int, db: Session = Depends(get_db)):
 
 
 @app.put("/update_xe/{id}/") #id is a path parameter
-def update_xe(id:int, ten_xe:str, db:Session=Depends(get_db)):
+def update_xe(id: int ,xe: schemas.Xe_Base, db:Session=Depends(get_db)):
 
     db_xe = crud.get_xe(db=db, id=id)
 
     if db_xe:
-        update_xe = crud.update_xe(db=db, id=id , ten_xe = ten_xe)
+        update_xe = crud.update_xe(db=db, xe=xe, id=id)
         return update_xe
     else:
         return {"error": f"xe voi id {id} khong ton tai"}
@@ -140,13 +157,13 @@ def read_tai_xe(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 def read_tai_xe_id(id: int, db: Session = Depends(get_db)):
     tai_xe = crud.get_tai_xe(db, id=id)
     return tai_xe
-"""
+
 #Crud lay chuyen xe theo tai xe
-@app.get("/doixe_xe/{id}")
+@app.get("/taixe_chuyenxe/{id}")
 def read_xe_theo_doi(id: int, skip: int = 0, limit: int = 100,  db: Session = Depends(get_db)):
     db_chuyenxe = crud.get_chuyenxe_theo_tai_xe(db, id=id , skip=skip, limit=limit)
     return db_chuyenxe
-"""
+
 @app.put("/update_taixe/{id}/") #id is a path parameter
 def update_tai_xe(id:int, ten_tai_xe:str, db:Session=Depends(get_db)):
 

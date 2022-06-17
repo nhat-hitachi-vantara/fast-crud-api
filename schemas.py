@@ -16,11 +16,13 @@ class Doi_xe(Doi_xe_Base):
     class Config:
         orm_mode = True
 
+class Xe_taixe(BaseModel):
+    xe_id: int
+    taixe_id: int
 
 class Xe_Base(BaseModel):
     ten_xe: str
     doi_xe_id: int
-
 
 
 class Xe_Create(Xe_Base):
