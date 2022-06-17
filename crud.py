@@ -105,7 +105,8 @@ def get_all_tai_xe(db:Session, skip: int = 0, limit: int = 100):
     return db.query(models.Tai_xe).offset(skip).limit(limit).all()
 
 def get_chuyenxe_theo_tai_xe(db: Session, id: int, skip: int = 0, limit: int = 100):
-    return db.query(models.Tai_xe,models.Chuyen_xe).filter(models.Tai_xe.tai_xe_chuyen_xe==models.Chuyen_xe.id).filter(models.Tai_xe.id==id).all()
+    #return db.query(models.Tai_xe,models.Chuyen_xe).filter(models.Tai_xe.tai_xe_chuyen_xe==models.Chuyen_xe.id).filter(models.Tai_xe.id==id).all()
+    return db.query(models.Tai_xe,models.Chuyen_xe).filter(models.Chuyen_xe.id.in_(models.Tai_xe.tai_xe_chuyen_xe)).filter(models.Tai_xe.id==id).all()
 
     
 
@@ -128,9 +129,9 @@ def create_tai_xe(db:Session, tai_xe: schemas.Tai_xe_Create):
     db.refresh(db_tai_xe)
     return db_tai_xe
 
-def update_tai_xe(db:Session, id:int , ten_tai_xe : str ):
+def update_tai_xe(db:Session, id:int , tai_xe : schemas.Tai_xe_Base ):
     db_tai_xe=get_tai_xe(db=db, id=id)
-    db_tai_xe.ten_tai_xe = ten_tai_xe
+    db_tai_xe.ten_tai_xe = tai_xe.ten_tai_xe
     db.commit()
     db.refresh(db_tai_xe)
     return db_tai_xe
@@ -163,9 +164,9 @@ def create_chuyen_xe(db:Session, chuyen_xe: schemas.Chuyen_xe_Create):
     db.refresh(db_chuyen_xe)
     return db_chuyen_xe
 
-def update_chuyen_xe(db:Session, id:int , ten_chuyen_xe : str ):
+def update_chuyen_xe(db:Session, id:int , chuyenxe : schemas.Chuyen_xe_Base ):
     db_chuyen_xe=get_chuyen_xe(db=db, id=id)
-    db_chuyen_xe.ten_chuyen_xe = ten_chuyen_xe
+    db_chuyen_xe.ten_chuyen_xe = chuyenxe.ten_chuyen_xe
     db.commit()
     db.refresh(db_chuyen_xe)
     return db_chuyen_xe

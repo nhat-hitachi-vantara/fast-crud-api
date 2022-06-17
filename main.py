@@ -160,17 +160,17 @@ def read_tai_xe_id(id: int, db: Session = Depends(get_db)):
 
 #Crud lay chuyen xe theo tai xe
 @app.get("/taixe_chuyenxe/{id}")
-def read_xe_theo_doi(id: int, skip: int = 0, limit: int = 100,  db: Session = Depends(get_db)):
+def read_chuyen_xe_theo_tai_xe(id: int, skip: int = 0, limit: int = 100,  db: Session = Depends(get_db)):
     db_chuyenxe = crud.get_chuyenxe_theo_tai_xe(db, id=id , skip=skip, limit=limit)
     return db_chuyenxe
 
 @app.put("/update_taixe/{id}/") #id is a path parameter
-def update_tai_xe(id:int, ten_tai_xe:str, db:Session=Depends(get_db)):
+def update_tai_xe(id:int, tai_xe:schemas.Tai_xe_Base, db:Session=Depends(get_db)):
 
     db_tai_xe = crud.get_tai_xe(db=db, id=id)
 
     if db_tai_xe:
-        update_tai_xe = crud.update_tai_xe(db=db, id=id ,ten_tai_xe = ten_tai_xe)
+        update_tai_xe = crud.update_tai_xe(db=db, id=id ,tai_xe = tai_xe)
         return update_tai_xe
     else:
         return {"error": f"tai xe voi id {id} khong ton tai"}
@@ -206,12 +206,12 @@ def read_chuyen_xe_id(id: int, db: Session = Depends(get_db)):
 
 
 @app.put("/update_chuyenxe/{id}/") #id is a path parameter
-def update_chuyen_xe ( id:int, ten_chuyen_xe:str, db:Session=Depends(get_db)):
+def update_chuyen_xe ( id:int, chuyenxe: schemas.Chuyen_xe_Base, db:Session=Depends(get_db)):
 
     db_chuyen_xe = crud.get_chuyen_xe(db=db, id=id)
 
     if db_chuyen_xe:
-        update_chuyen_xe = crud.update_chuyen_xe(db=db, id=id, ten_chuyen_xe = ten_chuyen_xe)
+        update_chuyen_xe = crud.update_chuyen_xe(db=db, id=id, chuyenxe = chuyenxe)
         return update_chuyen_xe
     else:
         return {"error": f"chuyen xe voi id {id} khong ton tai"}
