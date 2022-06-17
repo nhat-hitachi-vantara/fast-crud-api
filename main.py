@@ -1,3 +1,4 @@
+from sqlite3 import dbapi2
 from typing import List
 
 from fastapi import Depends, FastAPI, HTTPException
@@ -140,6 +141,11 @@ def read_tai_xe_id(id: int, db: Session = Depends(get_db)):
     tai_xe = crud.get_tai_xe(db, id=id)
     return tai_xe
 
+#Crud lay chuyen xe theo tai xe
+@app.get("/doixe_xe/{id}")
+def read_xe_theo_doi(id: int, skip: int = 0, limit: int = 100,  db: Session = Depends(get_db)):
+    db_chuyenxe = crud.get_chuyenxe_theo_tai_xe(db, id=id , skip=skip, limit=limit)
+    return db_chuyenxe
 
 @app.put("/update_taixe/{id}/") #id is a path parameter
 def update_tai_xe(id:int, ten_tai_xe:str, db:Session=Depends(get_db)):

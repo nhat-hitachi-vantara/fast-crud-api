@@ -71,7 +71,7 @@ def create_xe(db:Session,  xe : schemas.Xe_Create ):
     db.commit()
     db.refresh(db_xe)
     return db_xe
-
+#
 def update_xe(db:Session, id:int , ten_xe : str):
     db_xe=get_xe(db=db, id=id)
     db_xe.ten_xe = ten_xe
@@ -93,6 +93,12 @@ def get_tai_xe(db:Session, id:int):
 
 def get_all_tai_xe(db:Session, skip: int = 0, limit: int = 100):
     return db.query(models.Tai_xe).offset(skip).limit(limit).all()
+
+def get_chuyenxe_theo_tai_xe(db: Session, id: int, skip: int = 0, limit: int = 100):
+    return db.query(models.Tai_xe,models.Chuyen_xe).filter(models.Tai_xe.tai_xe_chuyen_xe==models.Chuyen_xe.id).filter(models.Tai_xe.id==id).all()
+    
+    
+
 
 def create_tai_xe(db:Session, tai_xe: schemas.Tai_xe_Create):
     db_tai_xe = models.Tai_xe(ten_tai_xe= tai_xe.ten_tai_xe)
