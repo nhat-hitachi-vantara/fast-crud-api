@@ -93,10 +93,10 @@ def get_tai_xe(db:Session, id:int):
 
 def get_all_tai_xe(db:Session, skip: int = 0, limit: int = 100):
     return db.query(models.Tai_xe).offset(skip).limit(limit).all()
-
+"""
 def get_chuyenxe_theo_tai_xe(db: Session, id: int, skip: int = 0, limit: int = 100):
     return db.query(models.Tai_xe,models.Chuyen_xe).filter(models.Tai_xe.tai_xe_chuyen_xe==models.Chuyen_xe.id).filter(models.Tai_xe.id==id).all()
-    
+"""
     
 
 
