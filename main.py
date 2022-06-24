@@ -22,27 +22,27 @@ def get_db():
 
 #CRUD cho doi xe-----------------------------------
 
-@app.post("/doixe/")
-def create_doi_xe(doi_xe: schemas.Doi_xe_Create, db: Session = Depends(get_db)):
-    return crud.create_doi_xe(db=db, doi_xe = doi_xe )
+@app.post("/doixe/", tags=['doi xe'])
+async def create_doi_xe(doi_xe: schemas.Doi_xe_Create, db: Session = Depends(get_db)):
+    return await crud.create_doi_xe(db=db, doi_xe = doi_xe )
 
-@app.get("/doixe/")
+@app.get("/doixe/", tags=['doi xe'])
 def read_doi_xe(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     doi_xe = crud.get_all_doi_xe(db, skip=skip, limit=limit)
     return doi_xe
 
 #Crud lay xe theo doi xe
-@app.get("/doixe_xe/{id}")
+@app.get("/doixe_xe/{id}", tags=['xe theo doi xe'])
 def read_xe_theo_doi(id: int, skip: int = 0, limit: int = 100,  db: Session = Depends(get_db)):
     db_doi_xe = crud.get_xe_theo_doi_xe(db, id=id , skip=skip, limit=limit)
     return db_doi_xe
 
-@app.get("/doixe/{id}")
+@app.get("/doixe/{id}", tags=['doi xe'])
 def read_doi_xe_id(id: int, db: Session = Depends(get_db)):
     db_doi_xe = crud.get_doi_xe(db, id=id)
     return db_doi_xe
 
-@app.put("/update_doixe/{id}/") #id is a path parameter
+@app.put("/update_doixe/{id}/", tags=['doi xe']) #id is a path parameter
 def update_doi_xe(id:int, ten_doi_xe:str, db:Session=Depends(get_db)):
 
     db_doi_xe = crud.get_doi_xe(db=db, id=id)
@@ -53,7 +53,7 @@ def update_doi_xe(id:int, ten_doi_xe:str, db:Session=Depends(get_db)):
     else:
         return {"error": f"doi xe voi id {id} khong ton tai"}
 
-@app.delete("/xoa_doixe/{id}/") #id is a path parameter
+@app.delete("/xoa_doixe/{id}/", tags=['doi xe']) #id is a path parameter
 def delete_doi_xe(id:int, db:Session=Depends(get_db)):
 
     db_doi_xe = crud.get_doi_xe(db=db, id=id)
@@ -63,7 +63,7 @@ def delete_doi_xe(id:int, db:Session=Depends(get_db)):
     else:
         return {"error": f"doi xe voi id {id} khong ton tai"}
 #Crud cho xe va tai  xe -------------------------------------------------------------------------------------------------------
-@app.post("/xetaixe/")
+@app.post("/xetaixe/",  tags=['create relationship xe tai xe'])
 def create_xetaixe( xetaixe: schemas.Xe_taixe,  db: Session = Depends(get_db)):
     return crud.create_xetaixe(db=db, xetaixe=xetaixe)
 
@@ -101,24 +101,24 @@ def create_article(db: Session, article_data: schema.ArticleCreate):
     return db_article
 """
 
-@app.post("/xe/")
+@app.post("/xe/", tags=['xe'])
 def create_xe( xe: schemas.Xe_Create,  db: Session = Depends(get_db)):
     return crud.create_xe(db=db, xe=xe)
 
 
-@app.get("/xe/")
+@app.get("/xe/", tags=['xe'])
 def read_all_xe(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     xe = crud.get_all_xe(db, skip=skip, limit=limit)
     return xe
 
 
-@app.get("/xe/{id}")
+@app.get("/xe/{id}", tags=['xe'])
 def read_xe_id(id: int, db: Session = Depends(get_db)):
     xe = crud.get_xe(db, id=id)
     return xe
 
 
-@app.put("/update_xe/{id}/") #id is a path parameter
+@app.put("/update_xe/{id}/", tags=['xe']) #id is a path parameter
 def update_xe(id: int ,xe: schemas.Xe_Base, db:Session=Depends(get_db)):
 
     db_xe = crud.get_xe(db=db, id=id)
@@ -130,7 +130,7 @@ def update_xe(id: int ,xe: schemas.Xe_Base, db:Session=Depends(get_db)):
         return {"error": f"xe voi id {id} khong ton tai"}
 
 
-@app.delete("/xoa_xe/{id}/") #id is a path parameter
+@app.delete("/xoa_xe/{id}/", tags=['xe']) #id is a path parameter
 def delete_xe(id:int, db:Session=Depends(get_db)):
 
     db_xe = crud.get_xe(db=db, id=id)
@@ -142,29 +142,29 @@ def delete_xe(id:int, db:Session=Depends(get_db)):
 
 #CRUD cho tai xe----------------------------------------
 
-@app.post("/taixe/")
+@app.post("/taixe/", tags=['tai xe'])
 def create_tai_xe(tai_xe: schemas.Tai_xe_Create, db: Session = Depends(get_db)):
     return crud.create_tai_xe(db=db, tai_xe = tai_xe )
 
 
-@app.get("/taixe/")
+@app.get("/taixe/", tags=['tai xe'])
 def read_tai_xe(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     tai_xe = crud.get_all_tai_xe(db, skip=skip, limit=limit)
     return tai_xe
 
 
-@app.get("/taixe/{id}")
+@app.get("/taixe/{id}", tags=['tai xe'])
 def read_tai_xe_id(id: int, db: Session = Depends(get_db)):
     tai_xe = crud.get_tai_xe(db, id=id)
     return tai_xe
 
 #Crud lay chuyen xe theo tai xe
-@app.get("/taixe_chuyenxe/{id}")
+@app.get("/taixe_chuyenxe/{id}", tags=['lay chuyen xe theo tai xe'])
 def read_chuyen_xe_theo_tai_xe(id: int, skip: int = 0, limit: int = 100,  db: Session = Depends(get_db)):
     db_chuyenxe = crud.get_chuyenxe_theo_tai_xe(db, id=id , skip=skip, limit=limit)
     return db_chuyenxe
 
-@app.put("/update_taixe/{id}/") #id is a path parameter
+@app.put("/update_taixe/{id}/", tags=['tai xe']) #id is a path parameter
 def update_tai_xe(id:int, tai_xe:schemas.Tai_xe_Base, db:Session=Depends(get_db)):
 
     db_tai_xe = crud.get_tai_xe(db=db, id=id)
@@ -176,7 +176,7 @@ def update_tai_xe(id:int, tai_xe:schemas.Tai_xe_Base, db:Session=Depends(get_db)
         return {"error": f"tai xe voi id {id} khong ton tai"}
 
 
-@app.delete("/xoa_taixe/{id}/") #id is a path parameter
+@app.delete("/xoa_taixe/{id}/", tags=['tai xe']) #id is a path parameter
 def delete_tai_xe(id:int, db:Session=Depends(get_db)):
 
     db_tai_xe = crud.get_tai_xe(db=db, id=id)
@@ -188,24 +188,24 @@ def delete_tai_xe(id:int, db:Session=Depends(get_db)):
 
 #Crud cho chuyen xe ---------------------------
 
-@app.post("/chuyenxe/")
+@app.post("/chuyenxe/", tags=['chuyen xe'])
 def create_chuyen_xe(chuyen_xe: schemas.Chuyen_xe_Create, db: Session = Depends(get_db)):
     return crud.create_chuyen_xe(db=db, chuyen_xe = chuyen_xe )
 
 
-@app.get("/chuyenxe/")
+@app.get("/chuyenxe/", tags=['chuyen xe'])
 def read_chuyen_xe(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     chuyen_xe = crud.get_all_chuyen_xe(db, skip=skip, limit=limit)
     return chuyen_xe
 
 
-@app.get("/chuyenxe/{id}")
+@app.get("/chuyenxe/{id}", tags=['chuyen xe'])
 def read_chuyen_xe_id(id: int, db: Session = Depends(get_db)):
     chuyen_xe = crud.get_chuyen_xe(db, id=id)
     return chuyen_xe
 
 
-@app.put("/update_chuyenxe/{id}/") #id is a path parameter
+@app.put("/update_chuyenxe/{id}/", tags=['chuyen xe']) #id is a path parameter
 def update_chuyen_xe ( id:int, chuyenxe: schemas.Chuyen_xe_Base, db:Session=Depends(get_db)):
 
     db_chuyen_xe = crud.get_chuyen_xe(db=db, id=id)
@@ -217,7 +217,7 @@ def update_chuyen_xe ( id:int, chuyenxe: schemas.Chuyen_xe_Base, db:Session=Depe
         return {"error": f"chuyen xe voi id {id} khong ton tai"}
 
 
-@app.delete("/xoa_chuyenxe/{id}/") #id is a path parameter
+@app.delete("/xoa_chuyenxe/{id}/", tags=['chuyen xe']) #id is a path parameter
 def delete_chuyen_xe(id:int, db:Session=Depends(get_db)):
 
     db_chuyen_xe = crud.get_chuyen_xe(db=db, id=id)
