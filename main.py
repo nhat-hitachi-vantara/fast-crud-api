@@ -1,4 +1,6 @@
+#from msilib import schema
 from sqlite3 import dbapi2
+import string
 from typing import List
 
 from fastapi import Depends, FastAPI, HTTPException
@@ -23,8 +25,8 @@ def get_db():
 #CRUD cho doi xe-----------------------------------
 
 @app.post("/doixe/", tags=['doi xe'])
-async def create_doi_xe(doi_xe: schemas.Doi_xe_Create, db: Session = Depends(get_db)):
-    return await crud.create_doi_xe(db=db, doi_xe = doi_xe )
+def create_doi_xe(doi_xe: schemas.Doi_xe_Create, db: Session = Depends(get_db)):
+    return  crud.create_doi_xe(db=db, doi_xe = doi_xe )
 
 @app.get("/doixe/", tags=['doi xe'])
 def read_doi_xe(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
@@ -37,18 +39,25 @@ def read_xe_theo_doi(id: int, skip: int = 0, limit: int = 100,  db: Session = De
     db_doi_xe = crud.get_xe_theo_doi_xe(db, id=id , skip=skip, limit=limit)
     return db_doi_xe
 
+#Crud lay doi xe theo ten
+@app.get("/doixe_ten/", tags=['doi xe theo ten'])
+def read_doi_xe_theo_ten(ten_doi_xe: str , skip: int = 0, limit: int = 100 ,db: Session = Depends(get_db)):
+    return crud.get_doi_xe_theo_ten(db, ten_doi_xe=ten_doi_xe)
+
+
+
 @app.get("/doixe/{id}", tags=['doi xe'])
 def read_doi_xe_id(id: int, db: Session = Depends(get_db)):
     db_doi_xe = crud.get_doi_xe(db, id=id)
     return db_doi_xe
 
 @app.put("/update_doixe/{id}/", tags=['doi xe']) #id is a path parameter
-def update_doi_xe(id:int, ten_doi_xe:str, db:Session=Depends(get_db)):
+def update_doi_xe(id:int, doi_xe:schemas.Doi_xe_Base, db:Session=Depends(get_db)):
 
     db_doi_xe = crud.get_doi_xe(db=db, id=id)
 
     if db_doi_xe:
-        update_doi_xe = crud.update_doi_xe(db=db, id=id ,ten_doi_xe = ten_doi_xe)
+        update_doi_xe = crud.update_doi_xe(db=db, id=id ,doi_xe=doi_xe)
         return update_doi_xe
     else:
         return {"error": f"doi xe voi id {id} khong ton tai"}

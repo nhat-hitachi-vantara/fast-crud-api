@@ -1,3 +1,4 @@
+import string
 from typing import List
 from sqlalchemy.orm import Session
 
@@ -7,6 +8,11 @@ import models, schemas
 
 def get_doi_xe(db: Session, id: int):
     return db.query(models.Doi_xe).filter(models.Doi_xe.id == id).first()
+
+#Crud lay doi xe theo ten
+
+def get_doi_xe_theo_ten(db:Session, ten_doi_xe:str, skip: int = 0, limit: int = 100):
+    return db.query(models.Doi_xe).filter(models.Doi_xe.ten_doi_xe==ten_doi_xe).all()
 
 #lay xe theo doi xe
 def get_xe_theo_doi_xe(db: Session, id: int, skip: int = 0, limit: int = 100):
@@ -23,9 +29,9 @@ def create_doi_xe(db: Session, doi_xe: schemas.Doi_xe_Create ):
     db.refresh(db_doi_xe)
     return db_doi_xe
 
-def update_doi_xe(db: Session, id:int , ten_doi_xe : str):
+def update_doi_xe(db: Session, id:int , doi_xe: schemas.Doi_xe_Create):
     db_doi_xe=get_doi_xe(db=db, id=id)
-    db_doi_xe.ten_doi_xe=ten_doi_xe
+    db_doi_xe.ten_doi_xe=doi_xe.ten_doi_xe
     db.commit()
     db.refresh(db_doi_xe)
     return db_doi_xe
