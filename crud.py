@@ -67,12 +67,23 @@ def create_user_groups(db: Session, user_groups: schemas.UserGroupsBase):
 
 #endpoint input cho xe va tai xe association table
 def create_xetaixe(db:Session , xetaixe : schemas.Xe_taixe):
-    db_xe=db.query(models.Xe).filter(models.Xe.id==xetaixe.xe_id).first()
-    db_taixe=db.query(models.Tai_xe).filter(models.Tai_xe.id==xetaixe.taixe_id).first()
-    db_xe.xe_tai_xe.append(db_taixe)
-    db.add(db_xe)
-    db.commit()
-    return "ok"
+    db_xe = db.query(models.Xe).filter(models.Xe.id==xetaixe.xe_id).first()
+    db_taixe = db.query(models.Tai_xe).filter(models.Tai_xe.id==xetaixe.taixe_id).first()
+    if(db_xe and db_taixe):
+        db_xe.xe_tai_xe.append(db_taixe)
+        db.add(db_xe)
+        db.commit()
+        return "ok"
+
+    elif(type(db_xe) == type(None) and db_taixe):
+        return(f"xe voi id {xetaixe.xe_id} khong ton tai")
+
+    elif(type(db_taixe) == type(None) and db_xe):
+        return(f"tai xe voi id {xetaixe.taixe_id} khong ton tai")
+
+    elif (type(db_xe) == type(None) and type(db_taixe) == type(None)) :
+        return(f"tai xe voi id {xetaixe.taixe_id} va xe voi id {xetaixe.xe_id} khong ton tai")
+
 ###############################################################################
 
 def create_xe(db:Session,  xe : schemas.Xe_Create ):
