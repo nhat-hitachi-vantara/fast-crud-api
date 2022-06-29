@@ -12,7 +12,11 @@ def get_doi_xe(db: Session, id: int):
 #Crud lay doi xe theo ten
 
 def get_doi_xe_theo_ten(db:Session, ten_doi_xe:str, skip: int = 0, limit: int = 100):
-    return db.query(models.Doi_xe).filter(models.Doi_xe.ten_doi_xe==ten_doi_xe).all()
+    result=db.query(models.Doi_xe).filter(models.Doi_xe.ten_doi_xe==ten_doi_xe).all()
+    if result:
+        return db.query(models.Doi_xe).filter(models.Doi_xe.ten_doi_xe==ten_doi_xe).all()
+    else:
+        return f"doi xe voi ten {ten_doi_xe} khong ton tai"
 
 #lay xe theo doi xe
 def get_xe_theo_doi_xe(db: Session, id: int, skip: int = 0, limit: int = 100):

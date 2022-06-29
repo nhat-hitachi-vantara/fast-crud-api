@@ -25,29 +25,6 @@ def get_db():
     finally:
         db.close()
 
-#CRUD test upload file
-
-
-@app.post("/upload")
-async def upload(file: UploadFile = File(...)):
-    contents = await file.read()
-    data = {}
-    file_copy = NamedTemporaryFile(delete=False)
-    
-    try:
-        with file_copy as f:  # The 'with' block ensures that the file closes and data are stored
-            f.write(contents);
-        
-        with open(file_copy.name,'r', encoding='utf-8') as csvf:
-            csvReader = csv.DictReader(csvf)
-            for rows in csvReader:             
-                key = rows['No']
-                data[key] = rows  
-    finally:
-        file_copy.close()  # Remember to close any file instances before removing the temp file
-        os.unlink(file_copy.name)  # delete the file
-    
-    return data
 
 
 
