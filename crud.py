@@ -44,6 +44,7 @@ def delete_doi_xe (db: Session , id:int):
         db_doi_xe = get_doi_xe(db=db , id=id)
         db.delete(db_doi_xe)
         db.commit()
+        return (f"doi xe voi id: {id} xoa thanh cong")
 
 #crud cho xe
 def get_xe(db: Session, id:int):
@@ -116,6 +117,7 @@ def delete_xe (db:Session , id:int):
     db_xe = get_xe(db=db , id=id)
     db.delete(db_xe)
     db.commit()
+    return (f"xe voi id: {id} xoa thanh cong")
 
 
 #Crud cho tai xe
@@ -159,6 +161,7 @@ def delete_tai_xe (db:Session , id:int):
     db_tai_xe = get_tai_xe(db=db , id=id)
     db.delete(db_tai_xe)
     db.commit()
+    return (f"tai xe voi id: {id} xoa thanh cong")
 
 #crud cho chuyen xe
 def get_chuyen_xe(db:Session, id:int):
@@ -193,3 +196,4 @@ def delete_chuyen_xe (db:Session , id:int):
     db_chuyen_xe = get_chuyen_xe(db=db , id=id)
     db.delete(db_chuyen_xe)
     db.commit()
+    return (f"chuyen xe voi id: {id} xoa thanh cong")
