@@ -2,3 +2,6 @@ fastapi
 sqlalchemy
 pydantic
 alembic
+gunicorn
+uvicorn
+psycopg2
