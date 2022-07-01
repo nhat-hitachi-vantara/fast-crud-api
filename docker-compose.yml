@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 version: '3.3'
 
 services:
@@ -10,3 +11,32 @@ services:
       - 8008:8000
 
 
+=======
+
+version: '3.7'
+
+services:
+  nudges:
+    build: .
+    command: uvicorn main:app --host 0.0.0.0 --port 80
+    volumes:
+      - .:/usr/src/personalised_nudges
+    ports:
+      - 80:80
+    depends_on:
+      - db
+
+  db:
+    image: postgres:12.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=username
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=nudges
+    expose: 
+      - 5432
+
+volumes:
+  postgres_data:
+>>>>>>> 4e3ab0c3809db51945b62d5a718772bfc01bd73c
