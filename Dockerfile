@@ -1,16 +1,15 @@
 # Dockerfile
 # pull the official docker image
-FROM python:3.11-rc-bullseye
-# 
-WORKDIR /code
-# 
-COPY ./requirements.txt /code/requirements.txt
-# 
-RUN pip install  -r requirements.txt
+FROM python:3.6-stretch
 
 # 
-COPY ./app /code/app
+COPY requirements.txt .
+# 
+RUN pip install  --proxy "http://192.168.114.154:3128" -r requirements.txt
+
+# --proxy "http://192.168.114.154:3128" --proxy http://donkey.cybersoft.vn:8080/
+COPY ./app .
 # 
 
-CMD ["uvicorn", "app.main:app","reload=True", "--host", "0.0.0.0", "--port", "80]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
 
